@@ -1,0 +1,68 @@
+{% extends 'base.html'%}
+
+
+{% block navbar %}
+    <ul class="nav navbar-nav">
+        <li><a href="{{ url_for('newMenuItem', restaurant_id=restaurant.id) }}">New Menu Item</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+
+{% block top_content%}
+    <div class="container">
+        <div class="jumbotron">
+            <h1>{{ restaurant.name }}</h1>
+            <p>...</p>
+            {% if restaurant.user_id == userInfo.id %}
+                <p>
+                    <a class="btn btn-primary btn-lg" href="{{ url_for('editRestaurant', restaurant_id=restaurant.id) }}" role="button">Edit</a>
+                    <a class="btn btn-danger btn-lg" href="{{ url_for('deleteRestaurant', restaurant_id=restaurant.id) }}" role="button">Delete</a>
+                </p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block main_content %}
+    <!-- START THE FEATURETTES -->
+    {% for item in items %}
+        {%- if loop.index is even %}
+
+            <div class="row featurette">
+                <div class="col-md-7 col-md-push-5">
+                    <h2 class="featurette-heading"> {{ item.name }} <span class="text-muted"> {{ item.price }} </span></h2>
+                    <p> {{ item.course }} </p>
+                    <p> {{ item.description }} </p>
+                </div>                    
+                <div class="col-md-5 col-md-pull-7">
+                    <a href="{{ url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=item.id)}}"><img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image"></a>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+        {% else %}
+
+            <div class="row featurette">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading"> {{ item.name }} <span class="text-muted"> {{ item.price }} </span></h2>
+                    <p> {{ item.course }} </p>
+                    <p> {{ item.description }} </p>
+                </div>                    
+                <div class="col-md-5">
+                    <a href="{{ url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=item.id)}}"><img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image"></a>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+        {% endif %}
+
+
+    {% endfor %}
+    <!-- /END THE FEATURETTES -->
+{% endblock %}
