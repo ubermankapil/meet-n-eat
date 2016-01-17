@@ -1,87 +1,32 @@
-{% extends 'base.html' %}
+<html>
+
+<head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
 
 
-{% block navbar %}
-    <ul class="nav navbar-nav">
-        <li><a href="{{ url_for('newRestaurant') }}">New Restaurant</a></li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </li>
-    </ul>
-{% endblock %}
+<body>
+<div class = 'pane'>
+<h1>Restaurants in Pilani</h1>
+
+<a href="{{url_for('newRestaurant')}}" > <h3> Create a New Restaurant </h3> </a>
+
+{% for restaurant in restaurants %}
 
 
-{% block top_content %}
-    <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>This is not a real world application.</h1>
-              <p>Thera are no authentication, validations and if you stop to think about the logic of this app it make no sense.
-                This is just my final project for the Udacity Full Stack Foundations course.</p>
-              <p><a class="btn btn-lg btn-primary" href="https://www.udacity.com/course/full-stack-foundations--ud088" role="button">Check the course website</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>How was it built?</h1>
-              <p>It was built with Python/Flask framework (my first time playing with Flask) as it is the framework chosen by the course. To give it a bit of visual appeal I used one Twitter Bootstrap.</p>
-<!--              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>-->
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>It may continue soon...</h1>
-              <p>I'm also working on a "native" Android/iOS version using adobe PhoneGap Build and PostgreSQL/Heroku.</p>
-<!--              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>-->
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div><!-- /.carousel -->
-{% endblock %}
+
+<a href = "{{url_for('showMenu', restaurant_id = restaurant.id)}}"> <p>{{restaurant.name}}</p></a>
+
+<p><a href = "{{url_for('editRestaurant',restaurant_id = restaurant.id)}}">Edit Restaurant</a></p>
+
+<p> <a href = "{{url_for('deleteRestaurant',restaurant_id = restaurant.id)}}">Delete Restaurant</a> </p>
 
 
-{% block main_content %}
-    <div class="row">
-        {% for restaurant in restaurants %}
-            <div class="col-md-3">
-                <a href="{{ url_for('showMenu', restaurant_id=restaurant.id) }}"><img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140"></a>
-                <h2>{{restaurant.name}}</h2>
-    <!--
-                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-    -->
-            </div>
-        {% endfor %}
 
-    </div>
-{% endblock %}
+
+{% endfor %}
+
+</div>
+</body>
+
+</html>
