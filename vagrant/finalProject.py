@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, jsonify, url_for
+from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
@@ -43,6 +43,7 @@ def newRestaurant():
         newRestaurant = Restaurant(name=request.form['name'])
         session.add(newRestaurant)
         session.commit()
+        flash("New Restaurant has been created")
         return redirect(url_for('showRestaurants'))
     else:
         return render_template('newRestaurant.html')
@@ -67,6 +68,7 @@ def deleteRestaurant(restaurant_id):
     if request.method == 'POST':
         session.delete(restaurantToDelete)
         session.commit()
+        flash("Restaurant has been deleted")
         return redirect(
             url_for('showRestaurants', restaurant_id=restaurant_id))
     else:
@@ -92,7 +94,7 @@ def newMenuItem(restaurant_id):
                            'description'], price=request.form['price'], course=request.form['course'], restaurant_id=restaurant_id)
         session.add(newItem)
         session.commit()
-
+        flash("new menu item created")
         return redirect(url_for('showMenu', restaurant_id=restaurant_id))
     else:
         return render_template('newmenuitem.html', restaurant_id=restaurant_id)
@@ -116,6 +118,7 @@ def editMenuItem(restaurant_id, menu_id):
             editedItem.course = request.form['course']
         session.add(editedItem)
         session.commit()
+        flash("Menu Item has been edited")
         return redirect(url_for('showMenu', restaurant_id=restaurant_id))
     else:
 
@@ -131,6 +134,7 @@ def deleteMenuItem(restaurant_id, menu_id):
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()
+        flash("Menu Item has been deleted")
         return redirect(url_for('showMenu', restaurant_id=restaurant_id))
     else:
         return render_template('deleteMenuItem.html', item=itemToDelete)
