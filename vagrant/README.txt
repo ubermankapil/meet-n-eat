@@ -1,18 +1,27 @@
-To run this application
+To run this application in your computer
 
 1. Clone this repository or Download as Zip.
-
 2. Then open your terminal in Linux or Mac OS.
+3. Navigate to meet-n-eat folder which has been cloned or downloaded to your computer.
+4. Then go inside the vagrant folder via the terminal.
+5. Run the command $vagrant up
+6. Now Run the command $vagrant ssh
+7. Navigate to vagrant folder by typing $cd /vagrant
+8. Now run the main file $python finalproject.py
+9. Now go to your default browser and type the url  localhost:5000 
+10. And here it is, the restaurants in my college campus.
 
-3. Navigate to the Pilani Restaurants folder inside the vagrant environment. Then go inside vagrant folder inside which all files of this application are located.
+If  you still didn't get the above steps, then follow this.
 
-If you want to create your own database for the restaurants of your choice, follow these below 3 process.
+Commands you need to run from your terminal.
 
-a) Run database_setup.py to create the database [ Type “python database_setup.py” in your linux or mac terminal ]
+$git clone https://github.com/ubermankapil/meet-n-eat.git
+$cd meet-n-eat
+$cd vagrant
+$vagrant up
+$vagrant ssh
+$cd /vagrant
+$python final project.py
 
-b) Run lotsofmenus.py to populate the database [ Type “python lotsofmenus.py” in your linux or mac terminal ]
-
-c) Run finalproject.py and navigate to localhost:5000 in your browser [ Type “python finalproject.py” in your linux or mac terminal ] 
-
-If you want to go with the database which I had created, then just Run finalproject.py and navigate to localhost:5000 in your browser [ Type “python finalproject.py” in your linux or mac terminal ] 
+Now go to your default browser and type the following  url localhost:5000 
 
